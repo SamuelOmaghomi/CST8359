@@ -10,64 +10,51 @@ class Lab1
 {
     static void Main(String[] args)
     {
-        string filePath = @"C:\Users\samue\source\repos\CST8227\Lab2\Lab2\Words.txt";
+        string filePath = @"../../../Words.txt";    //file path for the word.txt file
         IList<string> wordsList = new List<string>();
 
-        int userInput;
-        bool validInput;
+        string? userInput;
 
         do
         {
-            do
-            {
-                menu();
-                validInput = int.TryParse(Console.ReadLine(), out userInput);
-                if (!validInput)
-                {
-                    Console.WriteLine("Invalid Input");
-                }
-            } while (!validInput);
+            menu();
+            userInput = Console.ReadLine();
 
             switch (userInput)
             {
                 /* Remove this later */
-                case 0:
+                case "0":
                     printList(wordsList);
                     break;
-
-                case 1:
+                case "1":
                     wordsList = textToList(filePath, wordsList);
                     break;
-                case 2:
+                case "2":
                     IList<String> bSortResult = BubbleSort(wordsList);
                     break;
-                case 3:
+                case "3":
                     IList<String> LSortResult = LINQSort(wordsList);
                     break;
-                case 4:
+                case "4":
                     countDistinct(wordsList);
                     break;
-                case 5:
+                case "5":
                     lastTen(wordsList);
                     break;
-                case 6:
+                case "6":
                     printReverse(wordsList);
                     break;
-                case 7:
+                case "7":
                     endingWith(wordsList);
                     break;
-                case 8:
+                case "8":
                     contains(wordsList);
                     break;
-                case 9:
+                case "9":
                     moreThanStartsWith(wordsList);
                     break;
-                default:
-                    Console.WriteLine("Invalid option");
-                    break;
-
             }
-        } while (userInput != 10);
+        } while (userInput != "x");
 
     }
 
@@ -76,13 +63,13 @@ class Lab1
      */
     static IList<string> textToList(string filePath, IList<string> wordsList)
     {
-        int count = 0;
+        int count = 0;  //number of words in the file
         try
         {
-            using (StreamReader file = new StreamReader(filePath))
+            using (StreamReader file = new StreamReader(filePath))  //reads string from the words file
             {
                 string? word;
-                while ((word = file.ReadLine()) != null)
+                while ((word = file.ReadLine()) != null)    //while there is a word in the next like, add the word to the words list
                 {
                     wordsList.Add(word);
                     count++;
@@ -102,7 +89,7 @@ class Lab1
      */
     static void printList(IList<string> wordsList)
     {
-        for (int i = 0; i < wordsList.Count; i++)
+        for (int i = 0; i < wordsList.Count; i++)   //loops through the entire word list 
         {
             Console.WriteLine(wordsList[i]);
         }
@@ -114,25 +101,29 @@ class Lab1
     static IList<string> BubbleSort(IList<string> words)
     {
         IList<string> wordsAsc = new List<string>(words);
-        if (wordsAsc.Count != 0)
+        if (wordsAsc.Count != 0)    //if the words list isn't emmpty
         {
-            var timer = new System.Diagnostics.Stopwatch();
-            timer.Start();
+            var timer = new System.Diagnostics.Stopwatch(); 
+            timer.Start();  //time the algorithm started executing
 
-            int wordsLength = wordsAsc.Count;
-            for (int i = 0; i < wordsLength - 1; i++)
+            int wordsLength = wordsAsc.Count;   //length of the wordslist 
+            /*
+             * The algorithm compares 2 words, starting from the beginning, if the first word is greater(based on the alphabets in the word)
+             * the words are switched, the process continues until the last word 
+             */
+            for (int i = 0; i < wordsLength - 1; i++)   
             {
-                for (int j = 0; j < wordsLength - i - 1; j++)
+                for (int j = 0; j < wordsLength-i-1; j++)
                 {
                     if (string.Compare(wordsAsc[j], wordsAsc[j + 1]) == 1)
                     {
-                        string temp = wordsAsc[j];
+                        string temp = wordsAsc[j];  //temporary location to store word being switched
                         wordsAsc[j] = wordsAsc[j+1];
                         wordsAsc[j+1] = temp;
                     }
                 }
             }
-            timer.Stop();
+            timer.Stop();   //time the algorithm finished executing
             Console.WriteLine("Execution time: " + timer.ElapsedMilliseconds + "ms\n");
         }
         else
@@ -155,14 +146,13 @@ class Lab1
             var timer = new System.Diagnostics.Stopwatch();
             timer.Start();
 
+            //query using LINQ to return words in ascending order
             wordsAsc = (from word in words
                         orderby word ascending
-                        select word).ToList();
+                        select word).ToList();  
 
             timer.Stop();
             Console.WriteLine("Execution time: " + timer.ElapsedMilliseconds + "ms\n");
-
-
         }
         else
         {
@@ -179,7 +169,7 @@ class Lab1
     {
         if (words.Count != 0)
         {
-            IList<string> wordsDist = (words.Distinct()).ToList();
+            IList<string> wordsDist = (words.Distinct()).ToList(); 
             int distinctWords = wordsDist.Count;
             Console.WriteLine("Distinct count is " + distinctWords);
             return;
@@ -278,7 +268,7 @@ class Lab1
     {
         Console.Write("Choose an option:\n1. Import Words from file\n2. Bubble sort words\n3. LINQ/Lambda sort words\n4. Count the distinct words \n5. Take the last 10 words " +
             "\n6. Reverse print the words \n7. Get and display words that end with 'd' and display the count \n8. Get and display words that contain 'q' and display the count \n9. " +
-            "Get and display wors that are more than 3 charcters long and start with the letter 'a', and display the count \n10. Exit\n\nChoose an Option: ");
+            "Get and display wors that are more than 3 charcters long and start with the letter 'a', and display the count \nx. Exit\n\nChoose an Option: ");
     }
 
 
