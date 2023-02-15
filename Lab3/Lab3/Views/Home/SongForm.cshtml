@@ -1,0 +1,13 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Song Form";
+}
+
+<form asp-controller="Home" asp-action="Sing" method="post">
+    <label for="countBottles">Input the number of bottles between 50 - 100</label>
+    <input type="number" id="countBottles" name="countBottles" min="50" max="100"/>
+    <input type="submit" value="Submit">
+</form>

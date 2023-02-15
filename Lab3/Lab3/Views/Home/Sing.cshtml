@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Microsoft.AspNetCore.Http;
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Singing...";
+}
+
+@{
+    String? userInput = Context.Session.GetString("countBottles");
+    int numBottles = Convert.ToInt32(userInput);    //converts user input to string
+    for(int? i = numBottles; i > 0; i--)
+    {
+        String bot = "bottles";
+        if(i == 1)  //if the number of bottles is 1
+        {
+            bot = "bottle";
+        }
+        <pre>@i green @bot hanging on the wall,</pre>
+        <pre>@i green @bot hanging on the wall,</pre>
+        <pre>And if one green bottle should accidentally fall,</pre>
+        if (i - 1 == 1) //if the number of bottles is 1
+        {
+            bot = "bottle";
+        }
+        if(i-1 == 0) //if the number of bottles is 0
+        {
+            <pre>There'll be no green bottle hanging on the wall.</pre><br />
+            <pre>There is no green bottle hanging on the wall</pre>
+        }
+        else
+        {
+            <pre>There'll be @(i - 1) green @bot hanging on the wall.</pre>
+        }
+        <br />
+    }
+}
+
+
+<form asp-controller="Home" asp-action="SongForm" method="post">
+    <input type="submit" value="PlayAgain">
+</form>

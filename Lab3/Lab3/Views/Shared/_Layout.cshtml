@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+              <h2>Samuel Omaghomi. Welcome to my Lab 3!</h2>
+                @Html.ActionLink("Home", "Index", "Home")
+                @Html.ActionLink("Show the song!", "SongForm", "Home")
+                @Html.ActionLink("Students", "CreateStudent", "Home")
+            </div>
+        </nav>
+    </header>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <ul>
+                <li>Layout allows us to reuse portions of view content, mostly common elements, rather than having to implement them on every page</li>
+                <li>Layout is put in the Vies/Shared directory because the layout is shared between all the view, hence it can be accessed by the views.</li>
+                <li>_ViewImports and _ViewStart are placed in the Views/Shared folder so they can be accesssed by all the views</li>
+                <li>The CSS file is a static file and is placed in the wwwroot directory so it can be easily accessed since wwwroot acts as the web root folder</li>
+                <li>HomeController is placed in Controllers directory because the program looks in the Controllers directory when looking for a controller</li>
+                <li>All the Views are placed in the Views/Home diectory because the program searchs in the Views/Home directory when a view has been called</li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
