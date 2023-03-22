@@ -15,3 +15,8 @@
 /Lab4/Lab4/appsettings.Development.json
 /Lab4/Lab4/appsettings.json
 /Lab4/.vs
+/Lab5/.vs
+/Lab5/Lab5/bin
+/Lab5/Lab5/obj
+/Lab5/Lab5/Properties
+*.json
