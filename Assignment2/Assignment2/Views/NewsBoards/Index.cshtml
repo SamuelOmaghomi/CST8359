@@ -1,0 +1,78 @@
+﻿@model Assignment2.Models.ViewModels.NewsBoardViewModel
+
+@{
+    ViewData["Title"] = "NewsBoards";
+}
+
+<h1>Newsboards</h1>
+
+<p>
+    <a asp-action="Create">Create New NewsBoard</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Fee
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.NewsBoards)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fee)
+                </td>
+                <td>
+                    <a asp-action="Index" asp-route-id="@item.Id">Select</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="News" asp-action="Index" asp-route-id="@item.Id">News</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.Subscriptions != null)
+{
+    <h3>
+        Subscribers to the Newsboards
+    </h3>
+    <table class="table">
+        <tr>
+            @*
+        Counts the number of subscriptions in the Model
+        *@
+            @if (Model.Subscriptions.Count() > 0)
+            {
+                <th> Name </th>
+            }
+            else
+            {
+                <th> No Subscribers </th>
+            }
+        </tr>
+        @*
+    Prints each client with a particular subscription
+    *@
+        @foreach (var item in Model.Subscriptions)
+        {
+            <tr>
+                <td>
+                    @item.Client.FullName
+                </td>
+            </tr>
+        }
+    </table>
+}

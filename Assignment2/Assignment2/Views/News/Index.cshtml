@@ -1,0 +1,47 @@
+﻿@model Assignment2.Models.ViewModels.NewsViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" asp-route-id="@Model.NewsBoard.Id">Create New</a>
+</p>
+@if (Model.News.Count() != 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    FileName
+                </th>
+                <th>
+                    Url
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.News)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileName)
+                    </td>
+                    <td>
+                        <img src="@Html.DisplayFor(modelItem => item.Url)" style="max-width: 400px;" />
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.NewsId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4>There are no files to display.</h4>
+}
